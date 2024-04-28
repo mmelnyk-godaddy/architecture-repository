@@ -25,7 +25,7 @@ workspace {
             }
 
             events = container "Payment Events Stream" "Event Stream for Payment" {
-                tags "events"
+                tags "events, async"
             }
 
             cache = container "Cache" "Cache Layer for Payment" {
@@ -57,13 +57,27 @@ workspace {
             }
 
             paymentsApi -> sso "Authenticate and authorize request"
-            paymentsApi -> events "Listen on Payment Events"
-            routingApi -> events "Listen on Payment Events"
-            antiMoneyLaundry -> events "Listen on Payment Events"
-            fraudDetection -> events "Listen on Payment Events"
-            clearningApi -> events "Listen on Payment Events"
-            settlementApi -> events "Listen on Settlement Events"
-            validationApi -> events "Listen on Payment Events"
+            paymentsApi -> events "Listen on Payment Events" {
+                tags "async"
+            }
+            routingApi -> events "Listen on Payment Events" {
+                tags "async"
+            }
+            antiMoneyLaundry -> events "Listen on Payment Events" {
+                tags "async"
+            }
+            fraudDetection -> events "Listen on Payment Events" {
+                tags "async"
+            }
+            clearningApi -> events "Listen on Payment Events" {
+                tags "async"
+            }
+            settlementApi -> events "Listen on Settlement Events" {
+                tags "async"
+            }
+            validationApi -> events "Listen on Payment Events" {
+                tags "async"
+            }
             antiMoneyLaundry -> cache "Cache"
             fraudDetection -> cache "Cache"
             fraudDetection -> aiService "Score transaction"
@@ -95,7 +109,7 @@ workspace {
             title "Real Time Payment Data Flow"
             user -> paymentApp "Uses"
             paymentApp -> paymentsApi "Process payment"
-            paymentsApi -> events "New Payment"
+            paymentsApi -> events "New Payment" 
             events -> validationApi "Validation Topic"
             validationApi -> events "Compliance Topic"
             events -> routingApi "Routing Topic"
@@ -198,6 +212,16 @@ workspace {
             element "Failover" {
                 opacity 25
             }
+
+            relationship "Relationship" {
+                dashed false
+            }
+
+            relationship "async" {
+                dashed true
+            }
+
+            theme default
         }
     }
 
