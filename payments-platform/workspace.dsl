@@ -1,6 +1,7 @@
-workspace {
-    !adrs adrs
+workspace "Money.net - Payment Gateway System" {
+    !adrs adrs 
     !docs docs
+
     model {
         user = person "User"
         customer = person "Customer"
