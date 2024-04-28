@@ -25,7 +25,7 @@ jobs:
         brew install structurizr-site-generatr
 
     - name: Build the site
-      run: structurizr-site-generatr generate-site -w payments-platform/workspace.dsl -a assets --branches main --default-branch main
+      run: structurizr-site-generatr generate-site -w payments-platform/workspace.dsl --branches main --default-branch main
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4
