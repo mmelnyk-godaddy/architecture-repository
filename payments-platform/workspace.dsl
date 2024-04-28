@@ -1,5 +1,6 @@
 workspace {
-
+    !adrs adrs
+    !docs docs
     model {
         user = person "User"
         customer = person "Customer"
@@ -185,9 +186,7 @@ workspace {
             element "Customer" {
                 background #08427b
             }
-            element "external" {
-                background #999999
-            }
+            
             element "Software System" {
                 background #1168bd
                 color #ffffff
@@ -230,8 +229,39 @@ workspace {
                 dashed true
             }
 
+            element "external" {
+                background #999999
+            }
+
             theme default
         }
+    }
+
+    properties {
+        "c4plantuml.elementProperties" "true"
+        "c4plantuml.tags" "true"
+        # "generatr.style.colors.primary" "#485fc7"
+        # "generatr.style.colors.secondary" "#ffffff"
+        # "generatr.style.faviconPath" "site/favicon.ico"
+        # "generatr.style.logoPath" "site/logo.png"
+
+        # // Absolute URL's like "https://example.com/custom.css" are also supported
+        # "generatr.style.customStylesheet" "site/custom.css"
+
+        "generatr.svglink.target" "_self"
+
+        // Full list of available "generatr.markdown.flexmark.extensions"
+        // "Abbreviation,Admonition,AnchorLink,Aside,Attributes,Autolink,Definition,Emoji,EnumeratedReference,Footnotes,GfmIssues,GfmStrikethroughSubscript,GfmTaskList,GfmUsers,GitLab,Ins,Macros,MediaTags,ResizableImage,Superscript,Tables,TableOfContents,SimulatedTableOfContents,Typographic,WikiLinks,XWikiMacro,YAMLFrontMatter,YouTubeLink"
+        // see https://github.com/vsch/flexmark-java/wiki/Extensions
+        // ATTENTION:
+        // * "generatr.markdown.flexmark.extensions" values must be separated by comma
+        // * it's not possible to use "GitLab" and "ResizableImage" extensions together
+        // default behaviour, if no generatr.markdown.flexmark.extensions property is specified, is to load the Tables extension only
+        "generatr.markdown.flexmark.extensions" "Abbreviation,Admonition,AnchorLink,Attributes,Autolink,Definition,Emoji,Footnotes,GfmTaskList,GitLab,MediaTags,Tables,TableOfContents,Typographic"
+
+        "generatr.site.exporter" "c4"
+        "generatr.site.externalTag" "External System"
+        "generatr.site.nestGroups" "false"
     }
 
     configuration {
