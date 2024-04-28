@@ -3,10 +3,18 @@ workspace {
     model {
         user = person "User"
         customer = person "Customer"
+        eCommerceWebsite = softwareSystem "eCommerce Website" "Online store" {
+            tags "Web Browser"
+        }
+
+        eCommerceMobileApp = softwareSystem "eCommerce Mobile App" "Mobile App for online store" {
+            tags "Mobile App"
+        }
+
         paymentApp = softwareSystem "Payment Application" "Application integrates Payments Platform for payments processing" {
             tags "external"
         }
-        softwareSystem = softwareSystem "Payment Platform" {
+        softwareSystem = softwareSystem "Payment Gateway" "Payment Gateway for processing payments"{
             tags "Platform"
             paymentsApi = container "Payments API" "Provide payments capabilities for consumers" {
                 tags "API"
@@ -88,7 +96,8 @@ workspace {
             tags "Network, external"
         }
 
-        customer -> softwareSystem "Uses"
+        eCommerceWebsite -> softwareSystem "Uses"
+        eCommerceMobileApp -> softwareSystem "Uses"
         user -> paymentApp "Uses"
         paymentApp -> paymentsApi "Process payment"
         softwareSystem -> paymentNetwork "Uses"
@@ -195,7 +204,7 @@ workspace {
                 shape WebBrowser
             }
             element "Mobile App" {
-                shape MobileDeviceLandscape
+                shape MobileDevicePortrait
             }
             element "Database" {
                 shape Cylinder
