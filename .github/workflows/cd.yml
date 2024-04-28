@@ -32,5 +32,4 @@ jobs:
       with:
         branch: gh-pages
         folder: payments-platform/build/site
-        force: true
         clean: true
