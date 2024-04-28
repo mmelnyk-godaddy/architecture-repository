@@ -1,0 +1,20 @@
+@startuml
+set separator none
+title Payment Platform - System Context
+
+top to bottom direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+
+Person(Customer, "Customer", $descr="", $tags="", $link="")
+System(PaymentApplication, "Payment Application", $descr="Application integrates Payments Platform for payments processing", $tags="", $link="")
+System(PaymentNetwork, "Payment Network", $descr="", $tags="", $link="")
+System(PaymentPlatform, "Payment Platform", $descr="", $tags="", $link="")
+
+Rel(Customer, PaymentPlatform, "Uses", $techn="", $tags="", $link="")
+Rel(PaymentApplication, PaymentPlatform, "Process payment", $techn="", $tags="", $link="")
+Rel(PaymentPlatform, PaymentNetwork, "Uses", $techn="", $tags="", $link="")
+
+SHOW_LEGEND(true)
+@enduml
