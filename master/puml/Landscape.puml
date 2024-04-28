@@ -1,20 +1,22 @@
 @startuml
 set separator none
-title Payment Platform - System Context
+title Payment Gateway - System Context
 
 top to bottom direction
 
 !include <C4/C4>
 !include <C4/C4_Context>
 
-Person(Customer, "Customer", $descr="", $tags="", $link="")
-System(PaymentApplication, "Payment Application", $descr="Application integrates Payments Platform for payments processing", $tags="", $link="")
+System(eCommerceWebsite, "eCommerce Website", $descr="Online store", $tags="", $link="")
 System(PaymentNetwork, "Payment Network", $descr="", $tags="", $link="")
-System(PaymentPlatform, "Payment Platform", $descr="", $tags="", $link="")
+System(eCommerceMobileApp, "eCommerce Mobile App", $descr="Mobile App for online store", $tags="", $link="")
+System(PaymentApplication, "Payment Application", $descr="Application integrates Payments Platform for payments processing", $tags="", $link="")
+System(PaymentGateway, "Payment Gateway", $descr="Payment Gateway for processing payments", $tags="", $link="")
 
-Rel(Customer, PaymentPlatform, "Uses", $techn="", $tags="", $link="")
-Rel(PaymentApplication, PaymentPlatform, "Process payment", $techn="", $tags="", $link="")
-Rel(PaymentPlatform, PaymentNetwork, "Uses", $techn="", $tags="", $link="")
+Rel(eCommerceWebsite, PaymentGateway, "Uses", $techn="", $tags="", $link="")
+Rel(eCommerceMobileApp, PaymentGateway, "Uses", $techn="", $tags="", $link="")
+Rel(PaymentApplication, PaymentGateway, "Process payment", $techn="", $tags="", $link="")
+Rel(PaymentGateway, PaymentNetwork, "Uses", $techn="", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml

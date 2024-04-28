@@ -8,17 +8,17 @@ top to bottom direction
 !include <C4/C4_Context>
 !include <C4/C4_Container>
 
-System_Boundary("PaymentPlatform_boundary", "Payment Platform", $tags="") {
-  ContainerDb(PaymentPlatform.Cache, "Cache", $techn="", $descr="Cache Layer for Payment", $tags="", $link="")
-  Container(PaymentPlatform.RoutingAPI, "Routing API", $techn="", $descr="Routing Payment", $tags="", $link="")
-  Container(PaymentPlatform.AntiMoneyLaundry, "Anti Money Laundry", $techn="", $descr="AML for Payment", $tags="", $link="")
-  Container(PaymentPlatform.FraudDetection, "Fraud Detection", $techn="", $descr="Fraud Detection for Payment", $tags="", $link="")
-  Container(PaymentPlatform.AIService, "AI Service", $techn="", $descr="AI Service for Fraud Detection", $tags="", $link="")
-  ContainerDb(PaymentPlatform.LedgerDB, "Ledger DB", $techn="", $descr="Ledger Database", $tags="", $link="")
-  Container(PaymentPlatform.PaymentsAPI, "Payments API", $techn="", $descr="Provide payments capabilities for consumers", $tags="", $link="")
-  Container(PaymentPlatform.ValidationAPI, "Validation API", $techn="", $descr="Validate Payment", $tags="", $link="")
-  Container(PaymentPlatform.ClearingAPI, "Clearing API", $techn="", $descr="Clearing Payment", $tags="", $link="")
-  Container(PaymentPlatform.PaymentEventsStream, "Payment Events Stream", $techn="", $descr="Event Stream for Payment", $tags="", $link="")
+System_Boundary("PaymentGateway_boundary", "Payment Gateway", $tags="") {
+  Container(PaymentGateway.PaymentEventsStream, "Payment Events Stream", $techn="", $descr="Event Stream for Payment", $tags="", $link="")
+  ContainerDb(PaymentGateway.Cache, "Cache", $techn="", $descr="Cache Layer for Payment", $tags="", $link="")
+  Container(PaymentGateway.RoutingAPI, "Routing API", $techn="", $descr="Routing Payment", $tags="", $link="")
+  Container(PaymentGateway.AntiMoneyLaundry, "Anti Money Laundry", $techn="", $descr="AML for Payment", $tags="", $link="")
+  Container(PaymentGateway.FraudDetection, "Fraud Detection", $techn="", $descr="Fraud Detection for Payment", $tags="", $link="")
+  Container(PaymentGateway.AIService, "AI Service", $techn="", $descr="AI Service for Fraud Detection", $tags="", $link="")
+  ContainerDb(PaymentGateway.LedgerDB, "Ledger DB", $techn="", $descr="Ledger Database", $tags="", $link="")
+  Container(PaymentGateway.PaymentsAPI, "Payments API", $techn="", $descr="Provide payments capabilities for consumers", $tags="", $link="")
+  Container(PaymentGateway.ValidationAPI, "Validation API", $techn="", $descr="Validate Payment", $tags="", $link="")
+  Container(PaymentGateway.ClearingAPI, "Clearing API", $techn="", $descr="Clearing Payment", $tags="", $link="")
 }
 
 Person(User, "User", $descr="", $tags="", $link="")
@@ -26,18 +26,18 @@ System(PaymentApplication, "Payment Application", $descr="Application integrates
 System(PaymentNetwork, "Payment Network", $descr="", $tags="", $link="")
 
 Rel(User, PaymentApplication, "1. Uses", $techn="", $tags="", $link="")
-Rel(PaymentApplication, PaymentPlatform.PaymentsAPI, "2. Process payment", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.PaymentsAPI, PaymentPlatform.PaymentEventsStream, "3. New Payment", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.PaymentEventsStream, PaymentPlatform.ValidationAPI, "4. Validate Payment", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.PaymentEventsStream, PaymentPlatform.RoutingAPI, "5. Routing", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.PaymentEventsStream, PaymentPlatform.AntiMoneyLaundry, "6. AML check", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.PaymentEventsStream, PaymentPlatform.FraudDetection, "7. Fraud check", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.PaymentEventsStream, PaymentPlatform.ClearingAPI, "8. Clearing", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.AntiMoneyLaundry, PaymentPlatform.Cache, "9. Cache", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.FraudDetection, PaymentPlatform.Cache, "10. Cache", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.RoutingAPI, PaymentNetwork, "11. Send to network", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.FraudDetection, PaymentPlatform.AIService, "12. Score payment", $techn="", $tags="", $link="")
-Rel(PaymentPlatform.RoutingAPI, PaymentPlatform.LedgerDB, "13. Save to Ledger", $techn="", $tags="", $link="")
+Rel(PaymentApplication, PaymentGateway.PaymentsAPI, "2. Process payment", $techn="", $tags="", $link="")
+Rel(PaymentGateway.PaymentsAPI, PaymentGateway.PaymentEventsStream, "3. New Payment", $techn="", $tags="", $link="")
+Rel(PaymentGateway.PaymentEventsStream, PaymentGateway.ValidationAPI, "4. Validate Payment", $techn="", $tags="", $link="")
+Rel(PaymentGateway.PaymentEventsStream, PaymentGateway.RoutingAPI, "5. Routing", $techn="", $tags="", $link="")
+Rel(PaymentGateway.PaymentEventsStream, PaymentGateway.AntiMoneyLaundry, "6. AML check", $techn="", $tags="", $link="")
+Rel(PaymentGateway.PaymentEventsStream, PaymentGateway.FraudDetection, "7. Fraud check", $techn="", $tags="", $link="")
+Rel(PaymentGateway.PaymentEventsStream, PaymentGateway.ClearingAPI, "8. Clearing", $techn="", $tags="", $link="")
+Rel(PaymentGateway.AntiMoneyLaundry, PaymentGateway.Cache, "9. Cache", $techn="", $tags="", $link="")
+Rel(PaymentGateway.FraudDetection, PaymentGateway.Cache, "10. Cache", $techn="", $tags="", $link="")
+Rel(PaymentGateway.RoutingAPI, PaymentNetwork, "11. Send to network", $techn="", $tags="", $link="")
+Rel(PaymentGateway.FraudDetection, PaymentGateway.AIService, "12. Score payment", $techn="", $tags="", $link="")
+Rel(PaymentGateway.RoutingAPI, PaymentGateway.LedgerDB, "13. Save to Ledger", $techn="", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml
