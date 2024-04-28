@@ -1,5 +1,4 @@
 workspace "Money.net - Payment Gateway System" {
-    !adrs adrs 
     !docs docs
 
     model {
@@ -17,6 +16,8 @@ workspace "Money.net - Payment Gateway System" {
             tags "external"
         }
         softwareSystem = softwareSystem "Payment Gateway" "Payment Gateway for processing payments"{
+            !adrs adrs 
+
             tags "Platform"
             paymentsApi = container "Payments API" "Provide payments capabilities for consumers" {
                 tags "API"
