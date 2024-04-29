@@ -47,10 +47,6 @@ workspace "Money.net - Payment Gateway System" {
                 tags "API"
             }
 
-            antiMoneyLaundry = container "Anti Money Laundry" "AML for Payment" {
-                tags "AML"
-            }
-
             fraudDetection = container "Fraud Detection" "Fraud Detection for Payment" {
                 tags "Fraud Detection"
             }
@@ -74,9 +70,7 @@ workspace "Money.net - Payment Gateway System" {
             routingApi -> events "Listen on Payment Events" {
                 tags "async"
             }
-            antiMoneyLaundry -> events "Listen on Payment Events" {
-                tags "async"
-            }
+
             fraudDetection -> events "Listen on Payment Events" {
                 tags "async"
             }
@@ -89,7 +83,6 @@ workspace "Money.net - Payment Gateway System" {
             validationApi -> events "Listen on Payment Events" {
                 tags "async"
             }
-            antiMoneyLaundry -> cache "Cache"
             fraudDetection -> cache "Cache"
             fraudDetection -> aiService "Score transaction"
             settlementApi -> ledgerDB "Read transactions"
@@ -125,13 +118,10 @@ workspace "Money.net - Payment Gateway System" {
             events -> validationApi "Validation Topic"
             validationApi -> events "Compliance Topic"
             events -> routingApi "Routing Topic"
-            events -> antiMoneyLaundry "Compliance Topic"
             events -> fraudDetection "Compliance Topic"
             fraudDetection -> events "Clearing Topic"
-            antiMoneyLaundry -> events "Clearing Topic"
             clearningApi -> events "Routing Topic"
             events -> clearningApi "Clearing Topic"
-            antiMoneyLaundry -> cache "Cache"
             fraudDetection -> cache "Cache"
             routingApi -> paymentNetwork "Send to network"
             fraudDetection -> aiService "Score payment"
@@ -146,13 +136,10 @@ workspace "Money.net - Payment Gateway System" {
             events -> validationApi "Validation Topic"
             validationApi -> events "Compliance Topic"
             events -> routingApi "Routing Topic"
-            events -> antiMoneyLaundry "Compliance Topic"
             events -> fraudDetection "Compliance Topic"
             fraudDetection -> events "Clearing Topic"
-            antiMoneyLaundry -> events "Clearing Topic"
             fraudDetection -> aiService "Score payment"
             events -> clearningApi "Clearing Topic"
-            antiMoneyLaundry -> cache "Cache"
             fraudDetection -> cache "Cache"
 
             routingApi -> ledgerDB "Save to Ledger"
@@ -168,10 +155,8 @@ workspace "Money.net - Payment Gateway System" {
             paymentsApi -> events "New Payment"
             events -> validationApi "Validate Payment"
             events -> routingApi "Routing"
-            events -> antiMoneyLaundry "AML check"
             events -> fraudDetection "Fraud check"
             events -> clearningApi "Clearing"
-            antiMoneyLaundry -> cache "Cache"
             fraudDetection -> cache "Cache"
             routingApi -> paymentNetwork "Send to network"
             fraudDetection -> aiService "Score payment"
