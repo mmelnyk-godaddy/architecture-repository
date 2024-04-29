@@ -7,8 +7,8 @@ top to bottom direction
 !include <C4/C4>
 !include <C4/C4_Context>
 
-System(eCommerceWebsite, "eCommerce Website", $descr="Online store", $tags="", $link="")
 System(PaymentNetwork, "Payment Network", $descr="", $tags="", $link="")
+System(eCommerceWebsite, "eCommerce Website", $descr="Online store", $tags="", $link="")
 System(eCommerceMobileApp, "eCommerce Mobile App", $descr="Mobile App for online store", $tags="", $link="")
 System(PaymentApplication, "Payment Application", $descr="Application integrates Payments Platform for payments processing", $tags="", $link="")
 System(PaymentGateway, "Payment Gateway", $descr="Payment Gateway for processing payments", $tags="", $link="")
